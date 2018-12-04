@@ -1,9 +1,15 @@
 {
   "src": {
-    "tagName": "v%s"
+    "tagName": "v%s",
+    "commitMessage": "docs: release ${version}"
   },
   "github": {
     "release": true
+  },
+  "npm": {
+    "publish": true,
+    "private": false,
+    "access": "public"
   },
   "increment": "conventional:angular",
   "beforeChangelogCommand": "conventional-changelog -p angular -i CHANGELOG.md -s",

@@ -88,11 +88,12 @@ import * as assets from 'assets'
 | src            | number   | true     | -       | The src of the image                                                              |
 | alt            | string   | true     | ''      | Alternative text for image                                                        |
 | sizes          | string   | false    | -       | Sizes attribute to be used with src for determing best image for user's viewport. |
-| transitionTime | number   | true     | 750     | Time in millisecond to transition the blur effect                                 |
-| timingFunction | string   | true     | 'ease'  | Timing function to use for the blur effect                                        |
+| transitionTime | number   | true     | 750     | Time in millisecond to transition the effects                                     |
+| timingFunction | string   | true     | 'ease'  | Timing function to use for the effects                                            |
 | blur           | number   | false    | 10      | Initial value for the blur filter                                                 |
 | grayscale      | number   | false    | 0       | Initial value for the grayscale filter                                            |
 | opacity        | number   | false    | 1       | Initial value for the opacity filter                                              |
+| delay          | number   | false    | 0       | Time in milliseconds before src image is loaded                                   |
 
 ---
 

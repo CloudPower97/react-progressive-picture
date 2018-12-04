@@ -69,8 +69,15 @@ describe('Picture', () => {
       expect(picture.prop('blur')).toEqual(10)
       expect(picture.prop('opacity')).toEqual(1)
       expect(picture.prop('grayscale')).toEqual(0)
+      expect(picture.prop('delay')).toEqual(0)
       expect(picture.prop('transitionTime')).toEqual(750)
       expect(picture.prop('timingFunction')).toEqual('ease')
     })
+  })
+
+  it('should accept other props', () => {
+    const picture = shallow(<Picture alt="" width="128" className="my-img-selector" id="test" />)
+
+    expect(picture.find('.my-image-selector')).toBeTruthy()
   })
 })

@@ -14,9 +14,9 @@ export default class Picture extends Component {
       })
     ),
     /** Placeholder image to show until the src loads */
-    placholder: PropTypes.string,
+    placeholder: PropTypes.string,
     /** The src of the image */
-    src: PropTypes.string.isRequired,
+    src: PropTypes.string,
     /**Alternative text for image */
     alt: PropTypes.string.isRequired,
     /** Sizes attribute to be used with src for determing best image for user's viewport. */
@@ -30,7 +30,7 @@ export default class Picture extends Component {
     /**Initial value for the grayscale filter */
     grayscale: PropTypes.number,
     /** Initial value for the opacity filter */
-    opacity: PropTypes.opacity,
+    opacity: PropTypes.number,
   }
 
   static defaultProps = {
@@ -43,12 +43,14 @@ export default class Picture extends Component {
   }
 
   componentDidMount() {
-    const { sources } = this.props
+    const { sources, grayscale, opacity, blur } = this.props
     /* istanbul ignore next line */
     const observer = new IntersectionObserver(
       entries => {
         entries.forEach(({ isIntersecting, target }) => {
           if (isIntersecting) {
+            const originalSrc = target.src
+
             if (sources) {
               const source = target.parentNode.querySelector(
                 `source[srcset$="${getFileExtension(target.currentSrc)}"]`
@@ -61,6 +63,15 @@ export default class Picture extends Component {
 
             target.onload = () => {
               target.style.filter = 'blur(0.1px)'
+            }
+
+            target.onerror = () => {
+              /** This is to swap back the placeholder image as the source */
+              target.src = originalSrc
+              /** This is to override the style applied by onload */
+              setTimeout(() => {
+                target.style.filter = `blur(${blur}px) grayscale(${grayscale}) opacity(${opacity})`
+              }, 0)
             }
 
             observer.disconnect()

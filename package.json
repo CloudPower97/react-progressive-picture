@@ -1,6 +1,6 @@
 {
   "name": "@cloudpower97/react-progressive-picture",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple React picture component to progressively load images using a blur effect.",
   "main": "./lib/index.js",
   "scripts": {
@@ -14,7 +14,8 @@
     "build:watch": "babel -d lib src --watch",
     "lint": "eslint src/**/*.js",
     "fix": "npm-run-all lint -- --fix",
-    "pretty": "prettier --write src/**/**/*.js"
+    "pretty": "prettier --write src/**/**/*.js",
+    "prepublish": "npm-run-all build"
   },
   "files": [
     "lib",

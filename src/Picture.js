@@ -31,6 +31,8 @@ export default class Picture extends Component {
     grayscale: PropTypes.number,
     /** Initial value for the opacity filter */
     opacity: PropTypes.number,
+    /** Time in milliseconds before src image is loaded */
+    delay: PropTypes.number,
   }
 
   static defaultProps = {
@@ -40,51 +42,54 @@ export default class Picture extends Component {
     blur: 10,
     opacity: 1,
     grayscale: 0,
+    delay: 0,
   }
 
   componentDidMount() {
-    const { sources, grayscale, opacity, blur } = this.props
+    const { delay } = this.props
     /* istanbul ignore next line */
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(({ isIntersecting, target }) => {
-          if (isIntersecting) {
-            const originalSrc = target.src
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(({ isIntersecting, target }) => {
+        if (isIntersecting) {
+          setTimeout(() => {
+            this.swapSources(target)
+          }, delay)
 
-            if (sources) {
-              const source = target.parentNode.querySelector(
-                `source[srcset$="${getFileExtension(target.currentSrc)}"]`
-              )
-
-              source.srcset = source.dataset.srcset
-            } else {
-              target.src = target.dataset.src
-            }
-
-            target.onload = () => {
-              target.style.filter = 'blur(0.1px)'
-            }
-
-            target.onerror = () => {
-              /** This is to swap back the placeholder image as the source */
-              target.src = originalSrc
-              /** This is to override the style applied by onload */
-              setTimeout(() => {
-                target.style.filter = `blur(${blur}px) grayscale(${grayscale}) opacity(${opacity})`
-              }, 0)
-            }
-
-            observer.disconnect()
-          }
-        })
-      },
-      {
-        rootMargin: '0px 0px 0px 0px',
-        threshold: 0,
-      }
-    )
+          observer.disconnect()
+        }
+      })
+    })
 
     observer.observe(this._img)
+  }
+
+  swapSources(target) {
+    const { sources, grayscale, opacity, blur } = this.props
+
+    const originalSrc = target.src
+
+    if (sources) {
+      const source = target.parentNode.querySelector(
+        `source[srcset$="${getFileExtension(target.currentSrc)}"]`
+      )
+
+      source.srcset = source.dataset.srcset
+    } else {
+      target.src = target.dataset.src
+    }
+
+    target.onload = () => {
+      target.style.filter = 'blur(0.1px)'
+    }
+
+    target.onerror = () => {
+      /** This is to swap back the placeholder image as the source */
+      target.src = originalSrc
+      /** This is to override the style applied by onload */
+      setTimeout(() => {
+        target.style.filter = `blur(${blur}px) grayscale(${grayscale}) opacity(${opacity})`
+      }, 0)
+    }
   }
 
   renderSources() {
@@ -118,6 +123,8 @@ export default class Picture extends Component {
   ) {
     // Adds sizes props if sources isn't defined
     const sizesProp = skipSizes ? null : { sizes }
+
+    delete props.delay
 
     return (
       <img

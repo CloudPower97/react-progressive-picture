@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Picture should render a picture tag 1`] = `
+<picture>
+  <source
+    data-srcset="image.webp"
+    key="sources-0"
+    srcSet="image.webp"
+    type="image/webp"
+  />
+  <source
+    data-srcset="image.png"
+    key="sources-1"
+    srcSet="image.png"
+    type="image/png"
+  />
+  <img
+    alt=""
+    style={
+      Object {
+        "filter": "blur(10px) grayscale(0) opacity(1)",
+        "transition": "filter 750ms ease",
+      }
+    }
+  />
+</picture>
+`;
+
+exports[`Picture should render a picture tag with placeholders 1`] = `
+<picture>
+  <source
+    data-srcset="image.webp"
+    key="sources-0"
+    srcSet="image-placeholder.webp"
+    type="image/webp"
+  />
+  <source
+    data-srcset="image.png"
+    key="sources-1"
+    srcSet="image-placeholder.png"
+    type="image/png"
+  />
+  <img
+    alt=""
+    style={
+      Object {
+        "filter": "blur(10px) grayscale(0) opacity(1)",
+        "transition": "filter 750ms ease",
+      }
+    }
+  />
+</picture>
+`;
+
+exports[`Picture should render an img tag 1`] = `
+<img
+  alt=""
+  style={
+    Object {
+      "filter": "blur(10px) grayscale(0) opacity(1)",
+      "transition": "filter 750ms ease",
+    }
+  }
+/>
+`;
+
+exports[`Picture should render an img tag with a placeholder 1`] = `
+<img
+  alt=""
+  data-src="image.jpg"
+  src="image-placeholder.jpg"
+  style={
+    Object {
+      "filter": "blur(10px) grayscale(0) opacity(1)",
+      "transition": "filter 750ms ease",
+    }
+  }
+/>
+`;

@@ -1,0 +1,127 @@
+{
+  "name": "@cloudpower97/react-progressive-picture",
+  "version": "0.9.0",
+  "description": "A simple React picture component to progressively load images using a blur effect.",
+  "main": "./lib/index.js",
+  "scripts": {
+    "clean": "rimraf lib",
+    "prestart": "run-s clean fix pretty",
+    "start": "webpack-dev-server --mode development --open",
+    "pretest": "run-s pretty fix",
+    "test": "jest --env=jsdom --watch",
+    "prebuild": "run-s clean fix pretty",
+    "build": "NODE_ENV=production babel -d lib src",
+    "build:watch": "babel -d lib src --watch",
+    "lint": "eslint src/**/*.js",
+    "fix": "npm-run-all lint -- --fix",
+    "pretty": "prettier --write src/**/**/*.js"
+  },
+  "files": [
+    "lib",
+    "src"
+  ],
+  "homepage": "https://github.com/CloudPower97/react-progressive-picture",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CloudPower97/react-progressive-picture.git"
+  },
+  "keywords": [
+    "react",
+    "react-component",
+    "picture",
+    "image",
+    "progressive",
+    "lazyload",
+    "lazy",
+    "component"
+  ],
+  "author": {
+    "name": "Claudio Cortese",
+    "url": "https://github.com/CloudPower97"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CloudPower97/react-progressive-picture/issues"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.js": [
+      "yarn pretty",
+      "yarn fix",
+      "git add"
+    ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.6",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-react": "^7.0.0",
+    "@commitlint/cli": "^7.2.1",
+    "@commitlint/config-angular": "^7.1.2",
+    "babel-core": "^7.0.0-0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.4",
+    "babel-preset-minify": "^0.5.0",
+    "conventional-changelog-cli": "^2.0.11",
+    "css-loader": "^1.0.1",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.7.0",
+    "enzyme-to-json": "^3.3.4",
+    "eslint": "^5.9.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^22.1.0",
+    "eslint-plugin-react": "^7.11.1",
+    "file-loader": "^2.0.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "husky": "^1.2.0",
+    "image-webpack-loader": "^4.6.0",
+    "jest": "^23.6.0",
+    "jest-cli": "^23.6.0",
+    "lint-staged": "^8.1.0",
+    "mini-css-extract-plugin": "^0.4.5",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.15.3",
+    "prop-types": "^15.6.2",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-test-renderer": "^16.6.3",
+    "regenerator-runtime": "^0.13.1",
+    "release-it": "^8.2.0",
+    "rimraf": "^2.6.2",
+    "webpack": "^4.26.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0"
+  },
+  "jest": {
+    "verbose": true,
+    "setupFiles": [
+      "<rootDir>/test/setupTests.js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "moduleNameMapper": {
+      "^src(.*)$": "<rootDir>/src$1",
+      "^utils(.*)$": "<rootDir>/src/utils$1"
+    },
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/index.js"
+    ]
+  }
+}

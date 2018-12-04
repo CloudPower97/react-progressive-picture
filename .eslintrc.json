@@ -1,0 +1,61 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "amd": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:jest/recommended"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "import", "jest"],
+  "rules": {
+    "import/no-unresolved": 0,
+    "react/jsx-no-undef": 2,
+    "react/no-deprecated": 2,
+    "comma-dangle": [2, "always-multiline"],
+    "quotes": [
+      1,
+      "single",
+      {
+        "avoidEscape": true
+      }
+    ],
+    "no-undef": 2,
+    "global-strict": 0,
+    "no-extra-semi": 2,
+    "semi": ["error", "never"],
+    "no-underscore-dangle": 0,
+    "no-console": 1,
+    "no-unused-vars": 2,
+    "no-shadow": 0,
+    "no-unused-expressions": 0,
+    "consistent-return": 0,
+    "prefer-destructuring": 0,
+    "no-useless-constructor": 0,
+    "max-len": 0,
+    "prefer-const": 0,
+    "no-trailing-spaces": [
+      1,
+      {
+        "skipBlankLines": true
+      }
+    ],
+    "no-unreachable": 1,
+    "no-alert": 1,
+    "react/jsx-uses-react": 1,
+    "react/jsx-uses-vars": 1,
+    "react/prop-types": 2
+  },
+  "settings": {
+    "react": {
+      "version": "16.5.2"
+    }
+  }
+}

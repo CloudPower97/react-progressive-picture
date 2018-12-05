@@ -15,7 +15,8 @@
     "lint": "eslint src/**/*.js",
     "fix": "npm-run-all lint -- --fix",
     "pretty": "prettier --write src/**/**/*.js",
-    "prepublish": "npm-run-all build"
+    "publish": "release-it",
+    "release": "run-s build publish"
   },
   "files": [
     "lib",

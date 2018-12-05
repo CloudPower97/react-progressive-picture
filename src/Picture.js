@@ -33,6 +33,12 @@ export default class Picture extends Component {
     opacity: PropTypes.number,
     /** Time in milliseconds before src image is loaded */
     delay: PropTypes.number,
+    /** IntersectionObserver options: https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver */
+    options: PropTypes.shape({
+      root: PropTypes.node,
+      rootMargin: PropTypes.string.isRequired,
+      threshold: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)]),
+    }).isRequired,
   }
 
   static defaultProps = {
@@ -43,10 +49,15 @@ export default class Picture extends Component {
     opacity: 1,
     grayscale: 0,
     delay: 0,
+    options: {
+      rootMargin: '0px 0px 0px 0px',
+      threshold: 0,
+    },
   }
 
   componentDidMount() {
-    const { delay } = this.props
+    const { delay, options } = this.props
+
     /* istanbul ignore next line */
     const observer = new IntersectionObserver(entries => {
       entries.forEach(({ isIntersecting, target }) => {
@@ -58,7 +69,7 @@ export default class Picture extends Component {
           observer.disconnect()
         }
       })
-    })
+    }, options)
 
     observer.observe(this._img)
   }
@@ -124,6 +135,7 @@ export default class Picture extends Component {
     // Adds sizes props if sources isn't defined
     const sizesProp = skipSizes ? null : { sizes }
 
+    delete props.options
     delete props.delay
 
     return (

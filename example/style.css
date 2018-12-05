@@ -1,12 +1,13 @@
 section {
-  min-height: 50vh;
-  padding: 25px;
-  display: flex;
-}
-
-section div {
+  min-height: 100vh;
   display: flex;
   align-content: center;
+  justify-content: center;
+}
+
+section figure {
+  display: flex;
+  align-items: center;
   justify-content: center;
   flex-direction: column;
 }

@@ -3,19 +3,20 @@
 exports[`Picture should render a picture tag 1`] = `
 <picture>
   <source
-    data-srcset="image.webp"
+    data-srcset={null}
     key="sources-0"
     srcSet="image.webp"
     type="image/webp"
   />
   <source
-    data-srcset="image.png"
+    data-srcset={null}
     key="sources-1"
     srcSet="image.png"
     type="image/png"
   />
   <img
     alt=""
+    data-src={null}
     style={
       Object {
         "filter": "blur(10px) grayscale(0) opacity(1)",
@@ -42,6 +43,7 @@ exports[`Picture should render a picture tag with placeholders 1`] = `
   />
   <img
     alt=""
+    data-src={null}
     style={
       Object {
         "filter": "blur(10px) grayscale(0) opacity(1)",
@@ -55,6 +57,7 @@ exports[`Picture should render a picture tag with placeholders 1`] = `
 exports[`Picture should render an img tag 1`] = `
 <img
   alt=""
+  data-src={null}
   style={
     Object {
       "filter": "blur(10px) grayscale(0) opacity(1)",

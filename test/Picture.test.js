@@ -59,6 +59,14 @@ describe('Picture', () => {
 
       expect(picture).toMatchSnapshot()
     })
+
+    it('other props', () => {
+      const picture = shallow(
+        <Picture alt="That's nice" width="128" className="my-img-selector" id="test" />
+      )
+
+      expect(picture).toMatchSnapshot()
+    })
   })
 
   describe('should initializes itself', () => {
@@ -79,31 +87,128 @@ describe('Picture', () => {
     })
   })
 
-  it('should accept other props', () => {
-    const picture = shallow(<Picture alt="" width="128" className="my-img-selector" id="test" />)
+  describe('should render placeholder', () => {
+    it('if providing a placeholder', () => {
+      const picture = shallow(
+        <Picture alt="" src="image.jpeg" placeholder="image-placeholder.svg" />
+      )
 
-    expect(picture.find('.my-image-selector')).toBeTruthy()
+      expect(picture.find('img').prop('data-src')).toBe('image.jpeg')
+      expect(picture.find('img').prop('src')).toBe('image-placeholder.svg')
+    })
+
+    it('if providing multiple placeholder attribute and different sources', () => {
+      const picture = shallow(
+        <Picture
+          alt=""
+          sources={[
+            {
+              placeholder: 'image-placeholder.webp',
+              srcSet: 'image.webp',
+              type: 'image/webp',
+            },
+            {
+              placeholder: 'image-placeholder.jpg',
+              srcSet: 'image.jpg',
+              type: 'image/jpg',
+            },
+          ]}
+        />
+      )
+
+      expect(
+        picture
+          .find('source')
+          .first()
+          .prop('data-srcset')
+      ).toBe('image.webp')
+
+      expect(
+        picture
+          .find('source')
+          .first()
+          .prop('srcSet')
+      ).toBe('image-placeholder.webp')
+    })
+
+    it('if providing a single placeholder attribute and different sources', () => {
+      const picture = shallow(
+        <Picture
+          alt=""
+          sources={[
+            {
+              srcSet: 'image.webp',
+              type: 'image/webp',
+            },
+            {
+              srcSet: 'image.jpg',
+              type: 'image/jpg',
+            },
+          ]}
+          placeholder="image-placeholder.svg"
+        />
+      )
+
+      expect(
+        picture
+          .find('source')
+          .at(0)
+          .prop('data-srcset')
+      ).toBe('image.webp')
+
+      expect(
+        picture
+          .find('source')
+          .at(0)
+          .prop('srcSet')
+      ).toBe('image-placeholder.svg')
+
+      expect(
+        picture
+          .find('source')
+          .at(1)
+          .prop('data-srcset')
+      ).toBe('image.jpg')
+
+      expect(
+        picture
+          .find('source')
+          .at(1)
+          .prop('srcSet')
+      ).toBe('image-placeholder.svg')
+    })
   })
 
-  it('should not have a data-src if no placeholder is given', () => {
-    const picture = shallow(<Picture alt="" src="image.jpg" />)
+  describe('should not render placeholder', () => {
+    it('if not providing a placeholder', () => {
+      const picture = shallow(<Picture alt="" src="image.jpg" />)
 
-    expect(picture.find('img').prop('data-src')).toBeFalsy()
-  })
+      expect(picture.find('img').prop('data-src')).toBeFalsy()
+    })
 
-  it('should not have a data-srcset on sources if no placeholder is given', () => {
-    const picture = shallow(
-      <Picture
-        alt=""
-        sources={[
-          {
-            srcSet: 'image.jpg',
-            type: 'image/jpg',
-          },
-        ]}
-      />
-    )
+    it('if providing different sources and not a placeholder', () => {
+      const picture = shallow(
+        <Picture
+          alt=""
+          sources={[
+            {
+              srcSet: 'image.webp',
+              type: 'image/webp',
+            },
+            {
+              srcSet: 'image.jpg',
+              type: 'image/jpg',
+            },
+          ]}
+        />
+      )
 
-    expect(picture.find('source').prop('data-srcset')).toBeFalsy()
+      expect(
+        picture
+          .find('source')
+          .first()
+          .prop('data-srcset')
+      ).toBeFalsy()
+    })
   })
 })

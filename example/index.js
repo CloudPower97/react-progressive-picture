@@ -30,7 +30,27 @@ const App = () => {
           <figcaption>A simple image tag with a broken src image</figcaption>
         </figure>
       </section>
-      <section>
+      <section id="multiple-placeholder">
+        <figure>
+          <Picture
+            alt=""
+            sources={[
+              {
+                srcSet: assets.imageWebp,
+                type: 'image/webp',
+              },
+              {
+                srcSet: assets.imageJpg,
+                type: 'image/jpg',
+              },
+            ]}
+          />
+          <figcaption>
+            A picture element tag with different sources and no placeholder images
+          </figcaption>
+        </figure>
+      </section>
+      <section id="multiple-placeholder">
         <figure>
           <Picture
             alt=""

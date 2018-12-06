@@ -56,7 +56,7 @@ export default class Picture extends Component {
   }
 
   componentDidMount() {
-    const { delay, options } = this.props
+    const { delay, placeholder, sources, options } = this.props
 
     /** We test this with Cypress */
     /* istanbul ignore next */
@@ -64,7 +64,11 @@ export default class Picture extends Component {
       entries.forEach(({ isIntersecting, target }) => {
         if (isIntersecting) {
           setTimeout(() => {
-            this.swapSources(target)
+            if (placeholder || (sources && Object.keys(...sources).includes('placeholder'))) {
+              this.swapSources(target)
+            } else {
+              target.style.filter = 'blur(0.1px)'
+            }
           }, delay)
 
           observer.disconnect()
@@ -115,7 +119,7 @@ export default class Picture extends Component {
         srcSet={placeholder || srcSet}
         media={media}
         type={type}
-        data-srcset={srcSet}
+        data-srcset={placeholder ? srcSet : null}
       />
     ))
   }
@@ -145,7 +149,7 @@ export default class Picture extends Component {
       <img
         alt={alt}
         src={placeholder || src}
-        data-src={src}
+        data-src={placeholder ? src : null}
         {...sizesProp}
         {...props}
         ref={img => (this._img = img)}

@@ -84,4 +84,26 @@ describe('Picture', () => {
 
     expect(picture.find('.my-image-selector')).toBeTruthy()
   })
+
+  it('should not have a data-src if no placeholder is given', () => {
+    const picture = shallow(<Picture alt="" src="image.jpg" />)
+
+    expect(picture.find('img').prop('data-src')).toBeFalsy()
+  })
+
+  it('should not have a data-srcset on sources if no placeholder is given', () => {
+    const picture = shallow(
+      <Picture
+        alt=""
+        sources={[
+          {
+            srcSet: 'image.jpg',
+            type: 'image/jpg',
+          },
+        ]}
+      />
+    )
+
+    expect(picture.find('source').prop('data-srcset')).toBeFalsy()
+  })
 })

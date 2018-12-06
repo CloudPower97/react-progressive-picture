@@ -82,11 +82,11 @@ export default class Picture extends Component {
   /** We test this with Cypress */
   /* istanbul ignore next */
   swapSources(target) {
-    const { sources, grayscale, opacity, blur } = this.props
+    const { grayscale, opacity, blur } = this.props
 
     const originalSrc = target.src
 
-    if (sources) {
+    if (target.parentNode.nodeName === 'PICTURE') {
       const source = target.parentNode.querySelector(
         `source[srcset$="${getFileExtension(target.currentSrc)}"]`
       )
@@ -111,15 +111,15 @@ export default class Picture extends Component {
   }
 
   renderSources() {
-    const { sources } = this.props
+    const { placeholder, sources } = this.props
 
-    return sources.map(({ srcSet, placeholder, media, type }, index) => (
+    return sources.map(({ srcSet, placeholder: sourcePlaceholder, media, type }, index) => (
       <source
         key={`sources-${index}`}
-        srcSet={placeholder || srcSet}
+        srcSet={placeholder || sourcePlaceholder || srcSet}
         media={media}
         type={type}
-        data-srcset={placeholder ? srcSet : null}
+        data-srcset={placeholder || sourcePlaceholder ? srcSet : null}
       />
     ))
   }

@@ -18,4 +18,16 @@ describe('Picture', () => {
       .scrollIntoView()
       .should('have.css', 'filter', 'blur(0.1px)')
   })
+
+  it('should render the image only if the specified threshold is met', () => {
+    const image = '#treshold-image img'
+
+    cy.scrollTo(0, Cypress.config().viewportHeight * 5 + Cypress.config().viewportHeight / 2)
+      .get(image)
+      .should('have.css', 'filter', 'blur(10px) grayscale(0) opacity(1)')
+
+    cy.scrollTo('bottom')
+      .get(image)
+      .should('have.css', 'filter', 'blur(0.1px)')
+  })
 })

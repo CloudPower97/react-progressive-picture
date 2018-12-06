@@ -47,7 +47,9 @@ export default class Picture extends Component {
 
   componentDidMount() {
     const { delay } = this.props
-    /* istanbul ignore next line */
+
+    /** We test this with Cypress */
+    /* istanbul ignore next */
     const observer = new IntersectionObserver(entries => {
       entries.forEach(({ isIntersecting, target }) => {
         if (isIntersecting) {
@@ -63,6 +65,8 @@ export default class Picture extends Component {
     observer.observe(this._img)
   }
 
+  /** We test this with Cypress */
+  /* istanbul ignore next */
   swapSources(target) {
     const { sources, grayscale, opacity, blur } = this.props
 

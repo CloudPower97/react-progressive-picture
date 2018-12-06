@@ -2,7 +2,7 @@
 
 [![made-for-react](https://img.shields.io/badge/Made%20for-React-1f425f.svg?style=for-the-badge)](https://reactjs.org/)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=for-the-badge)](https://github.com/prettier/prettier)
-[![Build Status](https://travis-ci.com/CloudPower97/react-progressive-picture.svg?branch=master&style=for-the-badge)](https://travis-ci.com/CloudPower97/react-progressive-picture)
+[![Build Status](https://travis-ci.com/CloudPower97/react-progressive-picture.svg?style=for-the-badge)](https://travis-ci.com/CloudPower97/react-progressive-picture)
 [![GitHub release](https://img.shields.io/github/release/CloudPower97/react-progressive-picture.svg?style=for-the-badge)](https://GitHub.com/CloudPower97/react-progressive-picture/releases/)
 [![GitHub contributors](https://img.shields.io/github/contributors/CloudPower97/react-progressive-picture.svg?style=for-the-badge)](https://GitHub.com/CloudPower97/react-progressive-picture/graphs/contributors/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](http://makeapullrequest.com)

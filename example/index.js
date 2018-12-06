@@ -93,6 +93,30 @@ const App = () => {
           <figcaption>A picture element with delayed lazy loading</figcaption>
         </figure>
       </section>
+      <section id="treshold-image">
+        <figure>
+          <Picture
+            alt=""
+            sources={[
+              {
+                placeholder: assets.placeholderWebp,
+                srcSet: assets.imageWebp,
+                type: 'image/webp',
+              },
+              {
+                placeholder: assets.placeholderJpg,
+                srcSet: assets.imageJpg,
+                type: 'image/jpg',
+              },
+            ]}
+            options={{
+              rootMargin: '0px 0px 0px 0px',
+              threshold: 1.0,
+            }}
+          />
+          <figcaption>A picture element with a treshold</figcaption>
+        </figure>
+      </section>
     </>
   )
 }

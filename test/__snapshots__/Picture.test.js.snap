@@ -80,3 +80,19 @@ exports[`Picture should render an img tag with a placeholder 1`] = `
   }
 />
 `;
+
+exports[`Picture should render other props 1`] = `
+<img
+  alt="That's nice"
+  className="my-img-selector"
+  data-src={null}
+  id="test"
+  style={
+    Object {
+      "filter": "blur(10px) grayscale(0) opacity(1)",
+      "transition": "filter 750ms ease",
+    }
+  }
+  width="128"
+/>
+`;

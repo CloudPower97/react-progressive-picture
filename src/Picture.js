@@ -56,7 +56,7 @@ export default class Picture extends Component {
   }
 
   componentDidMount() {
-    const { delay } = this.props
+    const { delay, options } = this.props
 
     /** We test this with Cypress */
     /* istanbul ignore next */

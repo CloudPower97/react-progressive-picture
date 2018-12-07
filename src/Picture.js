@@ -1,23 +1,39 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import getFileExtension from './utils/getFileExtension'
+import Observer from '@researchgate/react-intersection-observer'
 
 export default class Picture extends Component {
   static propTypes = {
-    /** The array of source objects */
+    /** The array of source objects specifies multiple media resources for the <picture>*/
     sources: PropTypes.arrayOf(
       PropTypes.shape({
+        /**
+         * A list of one or more strings separated by commas indicating a set of possible images
+         * represented by the source for the browser to use.
+         * The browser chooses the most adequate image to display at a given point of time.
+         */
         srcSet: PropTypes.string.isRequired,
+        /** Placeholder image to show until the srcSet loads */
         placeholder: PropTypes.string,
+        /**
+         * The media attribute specifies a media condition (similar to a media query)
+         * that the user agent will evaluate for each <source> element.
+         * If the media condition evaluates to false, its <source> element is skipped
+         **/
         media: PropTypes.string,
+        /**
+         * The type attribute specifies a MIME type for the resource URL(s) in the <source> element's srcset attribute.
+         * If the user agent does not support the given type, the <source> element is skipped.
+         */
         type: PropTypes.string,
       })
     ),
     /** Placeholder image to show until the src loads */
     placeholder: PropTypes.string,
-    /** The src of the image */
+    /** The image URL */
     src: PropTypes.string,
-    /**Alternative text for image */
+    /** Defines an alternative text description of the image. */
     alt: PropTypes.string.isRequired,
     /** Sizes attribute to be used with src for determing best image for user's viewport. */
     sizes: PropTypes.string,
@@ -33,12 +49,46 @@ export default class Picture extends Component {
     opacity: PropTypes.number,
     /** Time in milliseconds before src image is loaded */
     delay: PropTypes.number,
-    /** IntersectionObserver options: https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver */
+    /**
+     * react-intersection-observer options: https://github.com/researchgate/react-intersection-observer#options
+     * N.B. You will not be able to provide a custom onChange function
+     **/
     options: PropTypes.shape({
-      root: PropTypes.node,
-      rootMargin: PropTypes.string.isRequired,
+      /**
+       * The element that is used as the viewport for checking visibility of the target.
+       * Can be specified as string for selector matching within the document.
+       * Defaults to the browser viewport if not specified or if null.
+       */
+      root: PropTypes.oneOfType(
+        [PropTypes.string].concat(
+          typeof HTMLElement === 'undefined' ? [] : PropTypes.instanceOf(HTMLElement)
+        )
+      ),
+      /**
+       * Margin around the root. Can have values similar to the CSS margin property,
+       * e.g. "10px 20px 30px 40px" (top, right, bottom, left).
+       * If the root element is specified, the values can be percentages.
+       * This set of values serves to grow or shrink each side of the root element's
+       * bounding box before computing intersections.
+       * Defaults to all zeros.
+       */
+      rootMargin: PropTypes.string,
+      /**
+       * Either a single number or an array of numbers which indicate at what percentage
+       * of the target's visibility the observer's callback should be executed.
+       * If you only want to detect when visibility passes the 50% mark, you can use a value of 0.5.
+       * If you want the callback run every time visibility passes another 25%,
+       * you would specify the array [0, 0.25, 0.5, 0.75, 1].
+       * The default is 0 (meaning as soon as even one pixel is visible, the callback will be run).
+       * A value of 1.0 means that the threshold isn't considered passed until every pixel is visible.
+       */
       threshold: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)]),
-    }).isRequired,
+      /**
+       * Controls whether the element should stop being observed by its IntersectionObserver instance.
+       * Defaults to false.
+       */
+      disabled: PropTypes.bool,
+    }),
   }
 
   static defaultProps = {
@@ -49,68 +99,84 @@ export default class Picture extends Component {
     opacity: 1,
     grayscale: 0,
     delay: 0,
-    options: {
-      rootMargin: '0px 0px 0px 0px',
-      threshold: 0,
-    },
   }
 
-  componentDidMount() {
-    const { delay, placeholder, sources, options } = this.props
+  handleIntersection = ({ isIntersecting, target }, unobserve) => {
+    const { delay, placeholder, sources } = this.props
 
-    /** We test this with Cypress */
-    /* istanbul ignore next */
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(({ isIntersecting, target }) => {
-        if (isIntersecting) {
-          setTimeout(() => {
-            if (placeholder || (sources && Object.keys(...sources).includes('placeholder'))) {
-              this.swapSources(target)
-            } else {
-              target.style.filter = 'blur(0.1px)'
-            }
-          }, delay)
+    if (isIntersecting) {
+      setTimeout(() => {
+        if (placeholder || (sources && Object.keys(...sources).includes('placeholder'))) {
+          this.swapSources(target)
+        } else {
+          const image = target.querySelector('img') || target
 
-          observer.disconnect()
+          image.style.filter = 'blur(0.1px)'
         }
-      })
-    }, options)
+      }, delay)
 
-    observer.observe(this._img)
+      unobserve()
+    }
   }
 
   /** We test this with Cypress */
   /* istanbul ignore next */
-  swapSources(target) {
-    const { grayscale, opacity, blur } = this.props
+  swapSources = target => {
+    this.removeEffects(target, target.src)
 
-    const originalSrc = target.src
-
-    if (target.parentNode.nodeName === 'PICTURE') {
-      const source = target.parentNode.querySelector(
-        `source[srcset$="${getFileExtension(target.currentSrc)}"]`
+    if (target.querySelector('img')) {
+      const source = target.querySelector(
+        `source[srcset$="${getFileExtension(target.querySelector('img').currentSrc)}"]`
       )
 
-      source.srcset = source.dataset.srcset
+      if (source) {
+        source.srcset = source.dataset.srcset
+      } else {
+        /** Apparently <source>'s are not immediately appended to the DOM on a slow connection */
+        /** This is to make sure to swap the images as soon as the correct <source> is in the DOM */
+        new MutationObserver(([mutation], observer) => {
+          const { target: mutationTarget } = mutation
+
+          const source = mutationTarget
+            .closest('picture')
+            .querySelector(
+              `source[srcset$="${getFileExtension(target.querySelector('img').currentSrc)}"]`
+            )
+
+          source.srcset = source.dataset.srcset
+
+          observer.disconnect()
+        }).observe(target, {
+          attributes: true,
+          subtree: true,
+        })
+      }
     } else {
       target.src = target.dataset.src
     }
+  }
 
-    target.onload = () => {
-      target.style.filter = 'blur(0.1px)'
+  removeEffects = (target, originalSrc) => {
+    const { grayscale, opacity, blur } = this.props
+
+    const image = target.querySelector('img') || target
+
+    image.onload = () => {
+      image.style.filter = 'blur(0.1px)'
     }
 
-    target.onerror = () => {
+    image.onerror = () => {
       /** This is to swap back the placeholder image as the source */
-      target.src = originalSrc
+      image.src = originalSrc
+
       /** This is to override the style applied by onload */
       setTimeout(() => {
-        target.style.filter = `blur(${blur}px) grayscale(${grayscale}) opacity(${opacity})`
+        image.style.filter = `blur(${blur}px) grayscale(${grayscale}) opacity(${opacity})`
       }, 0)
     }
   }
 
-  renderSources() {
+  renderSources = () => {
     const { placeholder, sources } = this.props
 
     return sources.map(({ srcSet, placeholder: sourcePlaceholder, media, type }, index) => (
@@ -124,7 +190,7 @@ export default class Picture extends Component {
     ))
   }
 
-  renderImage(
+  renderImage = (
     {
       alt,
       src,
@@ -138,7 +204,7 @@ export default class Picture extends Component {
       ...props
     },
     skipSizes = false
-  ) {
+  ) => {
     // Adds sizes props if sources isn't defined
     const sizesProp = skipSizes ? null : { sizes }
 
@@ -152,7 +218,6 @@ export default class Picture extends Component {
         data-src={placeholder ? src : null}
         {...sizesProp}
         {...props}
-        ref={img => (this._img = img)}
         style={{
           filter: `blur(${blur}px) grayscale(${grayscale}) opacity(${opacity})`,
           transition: `filter ${transitionTime}ms ${timingFunction}`,
@@ -162,10 +227,12 @@ export default class Picture extends Component {
   }
 
   render() {
-    const { sources, ...props } = this.props
+    const { sources, options, ...props } = this.props
+
+    let component = this.renderImage(props)
 
     if (sources) {
-      return (
+      component = (
         <picture>
           {this.renderSources()}
           {this.renderImage(props, true)}
@@ -173,6 +240,10 @@ export default class Picture extends Component {
       )
     }
 
-    return this.renderImage(props)
+    return (
+      <Observer {...options} onChange={this.handleIntersection}>
+        {component}
+      </Observer>
+    )
   }
 }

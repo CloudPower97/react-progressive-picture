@@ -113,9 +113,7 @@
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"
   },
-  "dependencies": {
-    "@babel/polyfill": "^7.0.0"
-  },
+  "dependencies": {},
   "jest": {
     "verbose": true,
     "setupFiles": [

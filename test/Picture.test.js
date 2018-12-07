@@ -80,10 +80,6 @@ describe('Picture', () => {
       expect(picture.prop('delay')).toEqual(0)
       expect(picture.prop('transitionTime')).toEqual(750)
       expect(picture.prop('timingFunction')).toEqual('ease')
-      expect(picture.prop('options')).toEqual({
-        rootMargin: '0px 0px 0px 0px',
-        threshold: 0,
-      })
     })
   })
 

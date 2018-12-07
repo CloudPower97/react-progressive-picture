@@ -1,8 +1,9 @@
 language: node_js
 node_js:
   - 'stable'
+cache: yarn
 script:
-  - npm run test
+  - yarn test
 branches:
   only:
     - master

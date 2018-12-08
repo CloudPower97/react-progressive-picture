@@ -47,6 +47,11 @@ export default class Picture extends Component {
     grayscale: PropTypes.number,
     /** Initial value for the opacity filter */
     opacity: PropTypes.number,
+    /**
+     * The filter CSS property to applies graphical effects.
+     * Read more here: https://developer.mozilla.org/en-US/docs/Web/CSS/filter
+     **/
+    filter: PropTypes.string,
     /** Time in milliseconds before src image is loaded */
     delay: PropTypes.number,
     /**
@@ -113,7 +118,7 @@ export default class Picture extends Component {
         } else {
           const image = target.querySelector('img') || target
 
-          image.style.filter = 'blur(0.1px)'
+          image.style.filter = 'none'
         }
       }, delay)
 
@@ -159,12 +164,12 @@ export default class Picture extends Component {
 
   /** We test this with Cypress */
   removeEffects = /* istanbul ignore next */ (target, originalSrc) => {
-    const { grayscale, opacity, blur } = this.props
+    const { filter, grayscale, opacity, blur } = this.props
 
     const image = target.querySelector('img') || target
 
     image.onload = () => {
-      image.style.filter = 'blur(0.1px)'
+      image.style.filter = 'none'
     }
 
     image.onerror = () => {
@@ -173,7 +178,7 @@ export default class Picture extends Component {
 
       /** This is to override the style applied by onload */
       setTimeout(() => {
-        image.style.filter = `blur(${blur}px) grayscale(${grayscale}) opacity(${opacity})`
+        image.style.filter = filter || `blur(${blur}px) grayscale(${grayscale}) opacity(${opacity})`
       }, 0)
     }
   }
@@ -201,6 +206,7 @@ export default class Picture extends Component {
       blur,
       opacity,
       grayscale,
+      filter,
       transitionTime,
       timingFunction,
       ...props
@@ -221,7 +227,7 @@ export default class Picture extends Component {
         {...sizesProp}
         {...props}
         style={{
-          filter: `blur(${blur}px) grayscale(${grayscale}) opacity(${opacity})`,
+          filter: filter || `blur(${blur}px) grayscale(${grayscale}) opacity(${opacity})`,
           transition: `filter ${transitionTime}ms ${timingFunction}`,
         }}
       />

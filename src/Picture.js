@@ -106,7 +106,9 @@ export default class Picture extends Component {
     delay: 0,
   }
 
-  handleIntersection = ({ isIntersecting, target }, unobserve) => {
+  /** We test this with Cypress */
+  /* istanbul ignore next */
+  handleIntersection = /* istanbul ignore next */ ({ isIntersecting, target }, unobserve) => {
     const { delay, placeholder, sources } = this.props
 
     if (isIntersecting) {
@@ -125,8 +127,7 @@ export default class Picture extends Component {
   }
 
   /** We test this with Cypress */
-  /* istanbul ignore next */
-  swapSources = target => {
+  swapSources /* istanbul ignore next */ = target => {
     this.removeEffects(target, target.src)
 
     if (target.querySelector('img')) {
@@ -161,7 +162,8 @@ export default class Picture extends Component {
     }
   }
 
-  removeEffects = (target, originalSrc) => {
+  /** We test this with Cypress */
+  removeEffects = /* istanbul ignore next */ (target, originalSrc) => {
     const { filter, grayscale, opacity, blur } = this.props
 
     const image = target.querySelector('img') || target

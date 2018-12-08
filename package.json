@@ -9,7 +9,7 @@
     "cypress:open": "cypress open",
     "start": "webpack-dev-server --mode development",
     "dev": "run-p build:watch \"start --open\"",
-    "pretest": "run-s fix pretty",
+    "pretest": "npm-run-all build",
     "test": "server-test start http-get://localhost:8080 test:all",
     "test:coverage": "jest --env=jsdom --coverage && cat ./coverage/lcov.info | codacy-coverage && rm -rf ./coverage",
     "test:unit": "jest --env=jsdom",

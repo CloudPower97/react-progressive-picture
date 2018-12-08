@@ -37,13 +37,13 @@ export default class Picture extends Component {
     alt: PropTypes.string.isRequired,
     /** Sizes attribute to be used with src for determing best image for user's viewport. */
     sizes: PropTypes.string,
-    /**Time in millisecond to transition the effects */
+    /** Time in millisecond to transition the effects */
     transitionTime: PropTypes.number,
-    /**Timing function to use for the effects */
+    /** Timing function to use for the effects */
     timingFunction: PropTypes.string,
-    /**Initial value for the blur filter */
+    /** Initial value for the blur filter */
     blur: PropTypes.number,
-    /**Initial value for the grayscale filter */
+    /** Initial value for the grayscale filter */
     grayscale: PropTypes.number,
     /** Initial value for the opacity filter */
     opacity: PropTypes.number,
@@ -106,8 +106,12 @@ export default class Picture extends Component {
     delay: 0,
   }
 
-  /** We test this with Cypress */
-  /* istanbul ignore next */
+  // We test this with Cypress
+  /**
+   * @param {IntersectionObserverEntry} target
+   * @param {function} unobserve
+   * @memberof Picture
+   */
   handleIntersection = /* istanbul ignore next */ ({ isIntersecting, target }, unobserve) => {
     const { delay, placeholder, sources } = this.props
 
@@ -126,7 +130,12 @@ export default class Picture extends Component {
     }
   }
 
-  /** We test this with Cypress */
+  // We test this with Cypress
+  /**
+   * Swap the placeholder image with the real one
+   * @param {HTMLElement} target
+   * @memberof Picture
+   */
   swapSources /* istanbul ignore next */ = target => {
     this.removeEffects(target, target.src)
 
@@ -162,7 +171,7 @@ export default class Picture extends Component {
     }
   }
 
-  /** We test this with Cypress */
+  //  We test this with Cypress
   removeEffects = /* istanbul ignore next */ (target, originalSrc) => {
     const { filter, grayscale, opacity, blur } = this.props
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import * as assets from 'assets'
-import Picture from 'src'
+import Picture from 'lib'
 import './style.css'
 
 const App = () => {

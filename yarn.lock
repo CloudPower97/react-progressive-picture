@@ -1892,6 +1892,14 @@ babel-plugin-jest-hoist@^23.2.0:
   resolved "https://registry.yarnpkg.com/babel-plugin-jest-hoist/-/babel-plugin-jest-hoist-23.2.0.tgz#e61fae05a1ca8801aadee57a6d66b8cefaf44167"
   integrity sha1-5h+uBaHKiAGq3uV6bWa4zvr0QWc=
 
+babel-plugin-jsdoc-to-assert@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-jsdoc-to-assert/-/babel-plugin-jsdoc-to-assert-4.0.0.tgz#1d5ac0f7394e373e42e567464549da4691133c9e"
+  integrity sha512-Yo7E8E1Z+dln8l2vstKCBCLcQfHYDxhZYZm4uu4jmE7MnnidHsefcFAC99R2i6KjZY/JhpO3ynvOgpmSKZ7/zg==
+  dependencies:
+    doctrine "^2.0.0"
+    jsdoc-to-assert "^2.6.1"
+
 babel-plugin-minify-builtins@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-minify-builtins/-/babel-plugin-minify-builtins-0.5.0.tgz#31eb82ed1a0d0efdc31312f93b6e4741ce82c36b"
@@ -4265,7 +4273,7 @@ doctrine@1.5.0:
     esutils "^2.0.2"
     isarray "^1.0.0"
 
-doctrine@^2.1.0:
+doctrine@^2.0.0, doctrine@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/doctrine/-/doctrine-2.1.0.tgz#5cd01fc101621b42c4cd7f5d1a66243716d3f39d"
   integrity sha512-35mSku4ZXK0vfCuHEDAwt55dg2jNajHZ1odvF+8SSr82EsZY4QmXfuWso8oEd8zRhVObSN18aM0CjSdoBX7zIw==
@@ -7322,6 +7330,14 @@ jsbn@~0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
   integrity sha1-peZUwuWi3rXyAdls77yoDA7y9RM=
+
+jsdoc-to-assert@^2.6.1:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/jsdoc-to-assert/-/jsdoc-to-assert-2.8.0.tgz#99db2663ee4b1f2d383b99ceb0eaa0bcfc6b1934"
+  integrity sha1-mdsmY+5LHy04O5nOsOqgvPxrGTQ=
+  dependencies:
+    doctrine "^2.0.0"
+    object-assign "^4.1.0"
 
 jsdom@^11.5.1:
   version "11.12.0"

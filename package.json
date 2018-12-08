@@ -16,7 +16,7 @@
     "test:unit:watch": "jest --env=jsdom --watch",
     "test:e2e": "run-p dev-server cypress:open",
     "test:all": "npm-run-all test:coverage cypress:run",
-    "prebuild": "npm-run-all test",
+    "prebuild": "npm-run-all clean",
     "build": "cross-env BABEL_ENV=production babel -d lib src",
     "build:watch": "babel -d lib src --watch",
     "lint": "eslint src/**/*.js",
@@ -66,8 +66,10 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",
-    "@babel/core": "^7.1.6",
+    "@babel/core": "^7.2.0",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-transform-react-constant-elements": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-react": "^7.0.0",
     "@commitlint/cli": "^7.2.1",
@@ -76,6 +78,7 @@
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
+    "babel-plugin-transform-react-class-to-function": "^1.2.0",
     "babel-preset-minify": "^0.5.0",
     "codacy-coverage": "^3.3.0",
     "conventional-changelog-cli": "^2.0.11",
@@ -114,6 +117,7 @@
     "webpack-dev-server": "^3.1.10"
   },
   "dependencies": {
+    "@babel/runtime": "^7.2.0",
     "@researchgate/react-intersection-observer": "^0.7.4"
   },
   "jest": {

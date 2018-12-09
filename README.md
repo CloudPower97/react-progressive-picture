@@ -41,12 +41,6 @@
 
 It's highly customizable, support different placeholder based on sources, advanced _CSS_ `filter` effects and a lot more to make your design just the way you want it!
 
-> You also want to add the
-> [intersection-observer](https://www.npmjs.com/package/intersection-observer)
-> and/or [picturefill](https://www.npmjs.com/package/picturefill)
-> polyfill for full browser support. Check out adding the [polyfill](#polyfill)
-> for details about how you can include it.
-
 ---
 
 ## Installation
@@ -57,18 +51,24 @@ or
 
 `yarn add @cloudpower97/react-progressive-picture`
 
+> You also want to add the
+> [intersection-observer](https://www.npmjs.com/package/intersection-observer)
+> and/or [picturefill](https://www.npmjs.com/package/picturefill)
+> polyfill for full browser support. Check out adding the [polyfill](#polyfill)
+> for details about how you can include it.
+
 ---
 
 ## Why use this component?
 
 There are already some component out there that you can use to lazyload images OR to support the latest `<picture>` specification.
 
-**React Progressive Picture** itself has been inspired by such component,
+**React Progressive Picture** itself has been inspired by such components,
 as [`react-progressive-image-loading`](https://github.com/wcandillon/react-progressive-image-loading) and [`react-responsive-picture`](https://github.com/braposo/react-responsive-picture).
 
 For example `react-progressive-image-loading` doesn't allow you to use the `<picture>` element and `react-responsive-picture` hasn't any option for lazy loading.
 
-I was seeking the best of both world, so I started the development of **React Progressive Picture**
+I was seeking the best of both world, so I started the development of **React Progressive Picture**.
 
 Here are some key feature of **React Progressive Picture**:
 
@@ -181,7 +181,7 @@ All of the above assure us that our code base is always consistent with the rule
 
 We are using [`Jest`](https://github.com/facebook/jest) and [`Enzyme`](https://github.com/airbnb/enzyme) to test our components.
 
-We also utilizes `cypress` to handle some edge cases which are hard to test othrewise.
+We also utilizes `cypress` to handle some edge cases which are hard to test otherwise.
 
 #### Commit Guidelines
 

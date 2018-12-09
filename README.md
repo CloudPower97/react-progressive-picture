@@ -2,29 +2,40 @@
 
 [![made-for-react](https://img.shields.io/badge/Made%20for-React-1f425f.svg?style=for-the-badge)](https://reactjs.org/)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=for-the-badge)](https://github.com/prettier/prettier)
-[![Build Status](https://travis-ci.com/CloudPower97/react-progressive-picture.svg?style=for-the-badge)](https://travis-ci.com/CloudPower97/react-progressive-picture)
 [![GitHub release](https://img.shields.io/github/release/CloudPower97/react-progressive-picture.svg?style=for-the-badge)](https://GitHub.com/CloudPower97/react-progressive-picture/releases/)
 [![GitHub contributors](https://img.shields.io/github/contributors/CloudPower97/react-progressive-picture.svg?style=for-the-badge)](https://GitHub.com/CloudPower97/react-progressive-picture/graphs/contributors/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](http://makeapullrequest.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-## Table of Contents
+[![Build Status](https://travis-ci.com/CloudPower97/react-progressive-picture.svg?style=for-the-badge)](https://travis-ci.com/CloudPower97/react-progressive-picture)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/330865ddfd1d45b0b09b1cbb5320123c)](https://www.codacy.com/app/claudio.cortese/react-progressive-picture?utm_source=github.com&utm_medium=referral&utm_content=CloudPower97/react-progressive-picture&utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/330865ddfd1d45b0b09b1cbb5320123c)](https://www.codacy.com/app/claudio.cortese/react-progressive-picture?utm_source=github.com&utm_medium=referral&utm_content=CloudPower97/react-progressive-picture&utm_campaign=Badge_Coverage)
 
-1. [Overview](#Overview)
-2. [Install](#Install)
-3. [Usage](#Usage)
-4. [Contributing](#Contributing)
-   - [Development](#Development)
-     - [Linters](#Linters)
-     - [Testing](#Testing)
-     - [Commit Guidelines](#Commit-Guidelines)
+<details>
+<summary><strong>Table of Contents</strong></summary>
+
+- [Overview](#overview)
+- [Installation](#installation)
+- [Why use this component?](#why-use-this-component)
+- [Documentation](#documentation)
+  - [Usage](#usage)
+  - [Options](#options)
+- [Polyfill](#polyfill)
+- [Contributing](#contributing)
+  - [Development](#development)
+  - [Linter](#linters)
+  - [Testing](#testing)
+  - [Commit Guidelines](#commit-guidelines)
+
+</details>
 
 ---
 
 ## Overview
 
-<img src="https://i.ibb.co/1nbysdb/react-progressive-picture.jpg" alt="React Progressive Picture" width="512">
-
+<p align="center">
+  <img src="https://i.ibb.co/1nbysdb/react-progressive-picture.jpg" alt="React Progressive Picture" width="512">
+</p>
 _React Progressive Picture_ is the right way to handle your `img` or `picture` element inside a `React` application.
 
 _React Progressive Picture_ is highly inspired by [`react-progressive-image-loading`](https://github.com/wcandillon/react-progressive-image-loading) and [`react-responsive-picture`](https://github.com/braposo/react-responsive-picture).
@@ -41,7 +52,7 @@ Also supports different kind of effects like blur, opacity and/or grayscale to m
 
 ---
 
-## Install
+## Installation
 
 `npm i @cloudpower97/react-progressive-picture`
 
@@ -51,36 +62,21 @@ or
 
 ---
 
-## Usage
+## Documentation
 
-```javascript
-import Picture from '@cloudpower97/react-progressive-picture'
-import * as assets from 'assets'
-;<Picture
-  blur={7}
-  grayscale={0.5}
-  opacity={0}
-  timingFunction="ease-out"
-  transitionTime={500}
-  alt="That's so nice!"
-  sources={[
-    {
-      placeholder: assets.placeholderWebp,
-      srcSet: assets.imageWebp,
-      type: 'image/webp',
-    },
-    {
-      placeholder: assets.placeholderJpg,
-      srcSet: assets.imageJpg,
-      type: 'image/jpg',
-    },
-  ]}
-/>
-```
+<!-- TODO: Add Demo section -->
+
+### Usage
+
+<img src="https://i.ibb.co/SxZCr2q/carbon.png" alt="carbon" border="0">
 
 > You can find more example in the `example` folder.
 
-### Props
+---
+
+<!-- TODO: Add new props to this table -->
+
+### Options
 
 | property       | propType | required | default | description                                                                       |
 | -------------- | -------- | -------- | ------- | --------------------------------------------------------------------------------- |
@@ -103,6 +99,8 @@ import * as assets from 'assets'
 > Yes please!
 
 Pull requests and [reporting an issue](https://github.com/CloudPower97/react-progressive-picture/issues) are always welcome :D
+
+<!-- TODO: Update development workflow -->
 
 ### Development
 
@@ -136,10 +134,10 @@ Once you are done, push to your fork and submit a pull request.
 
 #### Linters
 
-<div>
+<p align="center">
 <img src="https://prettier.io/icon.png" alt="Prettier" width="128">
 <img src="https://avatars-04.gitter.im/group/iv/3/57542cecc43b8c6019777d76" alt="ESLint" width="128">
-</div>
+</p>
 
 To enforce a consistent style across the entire project we are using [`Prettier`](https://prettier.io/).
 
@@ -157,10 +155,14 @@ It will bother you only for changes it can't fix.
 
 All of the above assure us that our code base is always consistent with the rules we are using and bug free as much as possible.
 
+<!-- TODO: Add cypress.io -->
+
 #### Testing
 
-<img src="https://d2eip9sf3oo6c2.cloudfront.net/tags/images/000/000/940/square_256/jestlogo.png" alt="Jest" width="128"/>
-
+<p align="center">
+  <img src="https://d2eip9sf3oo6c2.cloudfront.net/tags/images/000/000/940/square_256/jestlogo.png" alt="Jest" width="128"/>
+  <img src="https://www.cypress.io/img/logo-dark.36f3e062.png" width="128">
+</p>
 We are using [`Jest`](https://github.com/facebook/jest) and [`Enzyme`](https://github.com/airbnb/enzyme) to test our components.
 
 #### Commit Guidelines

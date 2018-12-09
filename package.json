@@ -22,7 +22,8 @@
     "lint": "eslint src/**/*.js",
     "fix": "npm-run-all lint -- --fix",
     "pretty": "prettier --write src/**/*.js",
-    "release": "run-s build release-it"
+    "release": "run-s build release-it",
+    "storybook": "start-storybook -p 9001"
   },
   "files": [
     "lib",
@@ -74,6 +75,9 @@
     "@babel/preset-react": "^7.0.0",
     "@commitlint/cli": "^7.2.1",
     "@commitlint/config-angular": "^7.1.2",
+    "@storybook/addon-info": "^4.0.12",
+    "@storybook/addon-options": "^4.0.12",
+    "@storybook/react": "^4.0.12",
     "babel-core": "^7.0.0-0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",

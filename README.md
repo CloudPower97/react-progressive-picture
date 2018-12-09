@@ -34,15 +34,12 @@
 ## Overview
 
 <p align="center">
-  <img src="https://i.ibb.co/1nbysdb/react-progressive-picture.jpg" alt="React Progressive Picture" width="512">
+  <img src=".github/logo.jpg" alt="React Progressive Picture" width="512">
 </p>
-_React Progressive Picture_ is the right way to handle your `img` or `picture` element inside a `React` application.
 
-_React Progressive Picture_ is highly inspired by [`react-progressive-image-loading`](https://github.com/wcandillon/react-progressive-image-loading) and [`react-responsive-picture`](https://github.com/braposo/react-responsive-picture).
+**React Progressive Picture** is the right way to handle the lazy loading of your `img` or `picture` element inside a `React` application.
 
-_React Progressive Picture_ does make internally uses of the [`Intersection Observer`](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) API to know exactly when to lazyload your beautiful image.
-
-Also supports different kind of effects like blur, opacity and/or grayscale to make your design just the way you want it!
+It's highly customizable, support different placeholder based on sources, advanced _CSS_ `filter` effects and a lot more to make your design just the way you want it!
 
 > You also want to add the
 > [intersection-observer](https://www.npmjs.com/package/intersection-observer)
@@ -62,35 +59,61 @@ or
 
 ---
 
+## Why use this component?
+
+There are already some component out there that you can use to lazyload images OR to support the latest `<picture>` specification.
+
+**React Progressive Picture** itself has been inspired by such component,
+as [`react-progressive-image-loading`](https://github.com/wcandillon/react-progressive-image-loading) and [`react-responsive-picture`](https://github.com/braposo/react-responsive-picture).
+
+For example `react-progressive-image-loading` doesn't allow you to use the `<picture>` element and `react-responsive-picture` hasn't any option for lazy loading.
+
+I was seeking the best of both world, so I started the development of **React Progressive Picture**
+
+Here are some key feature of **React Progressive Picture**:
+
+- _TDD_ led to the creation of an high quality code with 100% of test coverage
+- Using the _Intersection Observer API_ to know exactly when to lazyload your beautiful images, makes **React Progressive Picture** performance friendly.
+  - It actually uses [`react-intersection-observer`](https://github.com/researchgate/react-intersection-observer) behind the scenes, which is another high quality component which has 100% of test coverage as well
+- Define multiple placeholders based on source type or a single placeholder for all of your sources (Useful when you use technique like [`SQIP`](https://github.com/technopagan/sqip)).
+- Create advanced effects with _CSS_ `filter` and apply them to create you unique loading effects.
+- Control the `timing function` and the `transition time` to achieve exactly what you have in mind.
+- Lazy load an image after a custom _delay_.
+- Automatically add a default empty alt tag (also called the NULL alttext)to every image, implying they are just decorative images that serves no specific purpose.
+  [This is done for accessibility purposes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture#Usage_notes).
+- It simulates Medium progressive image loading out of the box with no configuration needed.
+
+---
+
 ## Documentation
 
 <!-- TODO: Add Demo section -->
 
 ### Usage
 
-<img src="https://i.ibb.co/SxZCr2q/carbon.png" alt="carbon" border="0">
+<img src=".github/code_example.png" alt="React Progressive Picture code example" border="0">
 
 > You can find more example in the `example` folder.
 
 ---
 
-<!-- TODO: Add new props to this table -->
-
 ### Options
 
-| property       | propType | required | default | description                                                                       |
-| -------------- | -------- | -------- | ------- | --------------------------------------------------------------------------------- |
-| sources        | array    | false    | -       | The array of source objects                                                       |
-| placeholder    | string   | false    | -       | Placeholder image to show until the src loads                                     |
-| src            | number   | true     | -       | The src of the image                                                              |
-| alt            | string   | true     | ''      | Alternative text for image                                                        |
-| sizes          | string   | false    | -       | Sizes attribute to be used with src for determing best image for user's viewport. |
-| transitionTime | number   | true     | 750     | Time in millisecond to transition the effects                                     |
-| timingFunction | string   | true     | 'ease'  | Timing function to use for the effects                                            |
-| blur           | number   | false    | 10      | Initial value for the blur filter                                                 |
-| grayscale      | number   | false    | 0       | Initial value for the grayscale filter                                            |
-| opacity        | number   | false    | 1       | Initial value for the opacity filter                                              |
-| delay          | number   | false    | 0       | Time in milliseconds before src image is loaded                                   |
+|    property    | propType | required | default |                                                          description                                                          |
+| :------------: | :------: | :------: | :-----: | :---------------------------------------------------------------------------------------------------------------------------: |
+|    sources     |  array   |  false   |    -    |                       The array of source objects specifies multiple media resources for the <picture>                        |
+|  placeholder   |  string  |  false   |    -    |                                         Placeholder image to show until the src loads                                         |
+|      src       |  number  |   true   |    -    |                                                         The image URL                                                         |
+|      alt       |  string  |   true   |   ''    |                                     Defines an alternative text description of the image.                                     |
+|     sizes      |  string  |  false   |    -    |                       Sizes attribute to be used with src for determing best image for user's viewport.                       |
+| transitionTime |  number  |   true   |   750   |                                         Time in millisecond to transition the effects                                         |
+| timingFunction |  string  |   true   | 'ease'  |                                            Timing function to use for the effects                                             |
+|      blur      |  number  |  false   |   10    |                                               Initial value for the blur filter                                               |
+|   grayscale    |  number  |  false   |    0    |                                            Initial value for the grayscale filter                                             |
+|    opacity     |  number  |  false   |    1    |                                             Initial value for the opacity filter                                              |
+|     filter     |  string  |  false   |    -    | The filter CSS property to applies graphical effects. Read more here: https://developer.mozilla.org/en-US/docs/Web/CSS/filter |
+|     delay      |  number  |  false   |    0    |                                        Time in milliseconds before src image is loaded                                        |
+|    options     |  object  |  false   |    -    |           react-intersection-observer options: https://github.com/researchgate/react-intersection-observer#options            |
 
 ---
 
@@ -99,8 +122,6 @@ or
 > Yes please!
 
 Pull requests and [reporting an issue](https://github.com/CloudPower97/react-progressive-picture/issues) are always welcome :D
-
-<!-- TODO: Update development workflow -->
 
 ### Development
 
@@ -112,23 +133,15 @@ Create a branch for the feature/fix:
 
 `git checkout -b feat:new-great-idea`
 
-Add tests and make them pass:
+Then:
 
-`npm run test`
-
-or
-
-`yarn test`
-
-You can also
-
-`npm run start`
+`npm run dev`
 
 or
 
-`yarn start`
+`yarn dev`
 
-to spin up a webpack dev server and see your changes as you make them in the `src` folder!
+to automatically spin up a webpack dev server and see your changes as you make them in the `src` folder!
 
 Once you are done, push to your fork and submit a pull request.
 
@@ -159,15 +172,16 @@ It will bother you only for changes it can't fix.
 
 All of the above assure us that our code base is always consistent with the rules we are using and bug free as much as possible.
 
-<!-- TODO: Add cypress.io -->
-
 #### Testing
 
 <p align="center">
   <img src="https://d2eip9sf3oo6c2.cloudfront.net/tags/images/000/000/940/square_256/jestlogo.png" alt="Jest" width="128"/>
   <img src="https://www.cypress.io/img/logo-dark.36f3e062.png" width="128">
 </p>
+
 We are using [`Jest`](https://github.com/facebook/jest) and [`Enzyme`](https://github.com/airbnb/enzyme) to test our components.
+
+We also utilizes `cypress` to handle some edge cases which are hard to test othrewise.
 
 #### Commit Guidelines
 

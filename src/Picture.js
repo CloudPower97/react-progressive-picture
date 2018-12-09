@@ -37,16 +37,21 @@ export default class Picture extends Component {
     alt: PropTypes.string.isRequired,
     /** Sizes attribute to be used with src for determing best image for user's viewport. */
     sizes: PropTypes.string,
-    /**Time in millisecond to transition the effects */
+    /** Time in millisecond to transition the effects */
     transitionTime: PropTypes.number,
-    /**Timing function to use for the effects */
+    /** Timing function to use for the effects */
     timingFunction: PropTypes.string,
-    /**Initial value for the blur filter */
+    /** Initial value for the blur filter */
     blur: PropTypes.number,
-    /**Initial value for the grayscale filter */
+    /** Initial value for the grayscale filter */
     grayscale: PropTypes.number,
     /** Initial value for the opacity filter */
     opacity: PropTypes.number,
+    /**
+     * The filter CSS property to applies graphical effects.
+     * Read more here: https://developer.mozilla.org/en-US/docs/Web/CSS/filter
+     **/
+    filter: PropTypes.string,
     /** Time in milliseconds before src image is loaded */
     delay: PropTypes.number,
     /**
@@ -101,7 +106,13 @@ export default class Picture extends Component {
     delay: 0,
   }
 
-  handleIntersection = ({ isIntersecting, target }, unobserve) => {
+  // We test this with Cypress
+  /**
+   * @param {IntersectionObserverEntry} target
+   * @param {function} unobserve
+   * @memberof Picture
+   */
+  handleIntersection = /* istanbul ignore next */ ({ isIntersecting, target }, unobserve) => {
     const { delay, placeholder, sources } = this.props
 
     if (isIntersecting) {
@@ -111,7 +122,7 @@ export default class Picture extends Component {
         } else {
           const image = target.querySelector('img') || target
 
-          image.style.filter = 'blur(0.1px)'
+          image.style.filter = 'none'
         }
       }, delay)
 
@@ -119,9 +130,13 @@ export default class Picture extends Component {
     }
   }
 
-  /** We test this with Cypress */
-  /* istanbul ignore next */
-  swapSources = target => {
+  // We test this with Cypress
+  /**
+   * Swap the placeholder image with the real one
+   * @param {HTMLElement} target
+   * @memberof Picture
+   */
+  swapSources /* istanbul ignore next */ = target => {
     this.removeEffects(target, target.src)
 
     if (target.querySelector('img')) {
@@ -156,13 +171,14 @@ export default class Picture extends Component {
     }
   }
 
-  removeEffects = (target, originalSrc) => {
-    const { grayscale, opacity, blur } = this.props
+  //  We test this with Cypress
+  removeEffects = /* istanbul ignore next */ (target, originalSrc) => {
+    const { filter, grayscale, opacity, blur } = this.props
 
     const image = target.querySelector('img') || target
 
     image.onload = () => {
-      image.style.filter = 'blur(0.1px)'
+      image.style.filter = 'none'
     }
 
     image.onerror = () => {
@@ -171,7 +187,7 @@ export default class Picture extends Component {
 
       /** This is to override the style applied by onload */
       setTimeout(() => {
-        image.style.filter = `blur(${blur}px) grayscale(${grayscale}) opacity(${opacity})`
+        image.style.filter = filter || `blur(${blur}px) grayscale(${grayscale}) opacity(${opacity})`
       }, 0)
     }
   }
@@ -199,6 +215,7 @@ export default class Picture extends Component {
       blur,
       opacity,
       grayscale,
+      filter,
       transitionTime,
       timingFunction,
       ...props
@@ -219,7 +236,7 @@ export default class Picture extends Component {
         {...sizesProp}
         {...props}
         style={{
-          filter: `blur(${blur}px) grayscale(${grayscale}) opacity(${opacity})`,
+          filter: filter || `blur(${blur}px) grayscale(${grayscale}) opacity(${opacity})`,
           transition: `filter ${transitionTime}ms ${timingFunction}`,
         }}
       />

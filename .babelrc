@@ -2,6 +2,9 @@
   "presets": ["@babel/env", "@babel/react"],
   "plugins": ["@babel/plugin-proposal-class-properties"],
   "env": {
+    "development": {
+      "plugins": ["jsdoc-to-assert"]
+    },
     "production": {
       "presets": [
         [
@@ -12,7 +15,13 @@
           }
         ],
         "minify"
-      ]
+      ],
+      "plugins": [
+        "@babel/plugin-transform-runtime",
+        "babel-plugin-transform-react-class-to-function",
+        "@babel/plugin-transform-react-constant-elements"
+      ],
+      "comments": false
     }
   }
 }

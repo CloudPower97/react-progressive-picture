@@ -4,7 +4,7 @@ describe('Picture', () => {
   })
 
   it('should fade in the image when it enters the viewport', () => {
-    cy.get('#multiple-effects-image img').should('have.css', 'filter', 'blur(0.1px)')
+    cy.get('#multiple-effects-image img').should('have.css', 'filter', 'none')
   })
 
   it('should render the placeholder if the src is broken', () => {
@@ -16,7 +16,7 @@ describe('Picture', () => {
   it('should render the image after a custom delay', () => {
     cy.get('#delay-image img')
       .scrollIntoView()
-      .should('have.css', 'filter', 'blur(0.1px)')
+      .should('have.css', 'filter', 'none')
   })
 
   it('should render the image only if the specified threshold is met', () => {
@@ -28,6 +28,6 @@ describe('Picture', () => {
 
     cy.scrollTo('bottom')
       .get(image)
-      .should('have.css', 'filter', 'blur(0.1px)')
+      .should('have.css', 'filter', 'none')
   })
 })

@@ -132,6 +132,10 @@ to spin up a webpack dev server and see your changes as you make them in the `sr
 
 Once you are done, push to your fork and submit a pull request.
 
+And remember,
+
+<img src="https://i.ibb.co/kmCyRnp/photo6294205586979530928.jpg" border="0" width="256">
+
 #### Linters
 
 <p align="center">

@@ -8,6 +8,7 @@ module.exports = {
       assets: path.resolve('./assets'),
       lib: path.resolve('./lib'),
       src: path.resolve('./src'),
+      vendor: path.resolve('./src/vendor'),
     },
   },
   module: {

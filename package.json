@@ -135,7 +135,8 @@
     ],
     "moduleNameMapper": {
       "^src(.*)$": "<rootDir>/src$1",
-      "^utils(.*)$": "<rootDir>/src/utils$1"
+      "^utils(.*)$": "<rootDir>/src/utils$1",
+      "^vendor(.*)$": "<rootDir>/src/vendor$1"
     },
     "collectCoverageFrom": [
       "src/**/*.js",

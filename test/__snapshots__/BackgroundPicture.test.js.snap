@@ -8,7 +8,11 @@ exports[`BackgroundPicture should handle placeholder hence the element should ha
     data-src="image.jpg"
     style={
       Object {
+        "backgroundAttachment": "initial",
         "backgroundImage": "url(image-placeholder.jpg)",
+        "backgroundPosition": "initial",
+        "backgroundRepeat": "initial",
+        "backgroundSize": "initial",
         "filter": "blur(10px) grayscale(0) opacity(1)",
         "transition": "filter 750ms ease",
         "width": "100%",
@@ -26,7 +30,11 @@ exports[`BackgroundPicture should render with children 1`] = `
     data-src={null}
     style={
       Object {
+        "backgroundAttachment": "initial",
         "backgroundImage": "url(image.jpg)",
+        "backgroundPosition": "initial",
+        "backgroundRepeat": "initial",
+        "backgroundSize": "initial",
         "filter": "blur(10px) grayscale(0) opacity(1)",
         "transition": "filter 750ms ease",
         "width": "100%",
@@ -48,7 +56,11 @@ exports[`BackgroundPicture should render without children 1`] = `
     data-src={null}
     style={
       Object {
+        "backgroundAttachment": "initial",
         "backgroundImage": "url(image.jpg)",
+        "backgroundPosition": "initial",
+        "backgroundRepeat": "initial",
+        "backgroundSize": "initial",
         "filter": "blur(10px) grayscale(0) opacity(1)",
         "transition": "filter 750ms ease",
         "width": "100%",

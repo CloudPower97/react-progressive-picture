@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BackgroundPicture should handle placeholder hence the element should have a \`background-image\` with an url value of the given placeholder prop 1`] = `
+<IntersectionObserver
+  onChange={[Function]}
+>
+  <div
+    data-src="image.jpg"
+    style={
+      Object {
+        "backgroundImage": "url(image-placeholder.jpg)",
+        "filter": "blur(10px) grayscale(0) opacity(1)",
+        "transition": "filter 750ms ease",
+        "width": "100%",
+      }
+    }
+  />
+</IntersectionObserver>
+`;
+
+exports[`BackgroundPicture should render with children 1`] = `
+<IntersectionObserver
+  onChange={[Function]}
+>
+  <div
+    data-src={null}
+    style={
+      Object {
+        "backgroundImage": "url(image.jpg)",
+        "filter": "blur(10px) grayscale(0) opacity(1)",
+        "transition": "filter 750ms ease",
+        "width": "100%",
+      }
+    }
+  >
+    <h1>
+      Nice background picture!
+    </h1>
+  </div>
+</IntersectionObserver>
+`;
+
+exports[`BackgroundPicture should render without children 1`] = `
+<IntersectionObserver
+  onChange={[Function]}
+>
+  <div
+    data-src={null}
+    style={
+      Object {
+        "backgroundImage": "url(image.jpg)",
+        "filter": "blur(10px) grayscale(0) opacity(1)",
+        "transition": "filter 750ms ease",
+        "width": "100%",
+      }
+    }
+  />
+</IntersectionObserver>
+`;

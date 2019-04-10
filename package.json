@@ -1,6 +1,6 @@
 {
   "name": "@cloudpower97/react-progressive-picture",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A simple React picture component to progressively load images using various effects.",
   "main": "./lib/index.js",
   "scripts": {

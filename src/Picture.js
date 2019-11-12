@@ -218,6 +218,7 @@ export default class Picture extends Component {
       filter,
       transitionTime,
       timingFunction,
+      style = {},
       ...props
     },
     skipSizes = false
@@ -238,6 +239,7 @@ export default class Picture extends Component {
         style={{
           filter: filter || `blur(${blur}px) grayscale(${grayscale}) opacity(${opacity})`,
           transition: `filter ${transitionTime}ms ${timingFunction}`,
+          ...style,
         }}
       />
     )

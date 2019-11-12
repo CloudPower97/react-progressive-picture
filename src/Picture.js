@@ -248,16 +248,14 @@ export default class Picture extends Component {
   render() {
     const { sources, options, ...props } = this.props
 
-    let component = this.renderImage(props)
-
-    if (sources) {
-      component = (
-        <picture>
-          {this.renderSources()}
-          {this.renderImage(props, true)}
-        </picture>
-      )
-    }
+    const component = sources ? (
+      <picture>
+        {this.renderSources()}
+        {this.renderImage(props, true)}
+      </picture>
+    ) : (
+      this.renderImage(props)
+    )
 
     return (
       <Observer {...options} onChange={this.handleIntersection}>
